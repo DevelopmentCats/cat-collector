@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Collector - Human Edition</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="/env.js"></script>
+</head>
+<body>
+    <main id="game-container">
+        <!-- Start Screen -->
+        <section id="start-screen" class="game-screen">
+            <header class="game-header">
+                <h1>Cat Collector</h1>
+                <h2>Human Edition</h2>
+            </header>
+            <div class="game-intro">
+                <p>In a world where cats have become the dominant species, you are a feline explorer on a mission to collect and catalog the mysterious creatures known as "humans".</p>
+                <p>Explore different locations, battle wild humans, and add them to your Humadex!</p>
+            </div>
+            <div class="start-buttons">
+                <button id="new-game-btn" class="primary-btn">New Game</button>
+                <button id="load-game-btn" class="secondary-btn">Load Game</button>
+                <button id="settings-btn" class="tertiary-btn">Settings</button>
+            </div>
+        </section>
+
+        <!-- Main Game Screen -->
+        <section id="main-game-screen" class="game-screen hidden">
+            <aside class="player-stats">
+                <div class="player-info">
+                    <h3 id="player-name">Whiskers</h3>
+                    <div class="stat-row">
+                        <span class="stat-label">Level:</span>
+                        <span id="player-level">1</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">XP:</span>
+                        <span id="player-xp">0/100</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Treats:</span>
+                        <span id="player-treats">10</span>
+                    </div>
+                </div>
+                <div class="player-stats-details">
+                    <div class="stat-row">
+                        <span class="stat-label">Floof:</span>
+                        <span id="player-floof">5</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Agility:</span>
+                        <span id="player-agility">5</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Charm:</span>
+                        <span id="player-charm">5</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Humans:</span>
+                        <span id="humans-collected">0/25</span>
+                    </div>
+                </div>
+                <div class="inventory-section">
+                    <h4>Inventory</h4>
+                    <ul id="inventory-list">
+                        <li>Catnip (x3)</li>
+                        <li>Yarn Ball (x1)</li>
+                        <li>Cardboard Box (x1)</li>
+                    </ul>
+                </div>
+            </aside>
+            <div class="game-content">
+                <div class="location-info">
+                    <h3 id="current-location">Suburban Backyard</h3>
+                </div>
+                <div id="narrative-text" class="narrative-text">
+                    <p>You find yourself in a quiet suburban backyard. The grass is freshly cut, and you can smell the distinct scent of humans nearby.</p>
+                    <p>What would you like to do?</p>
+                </div>
+                <div id="choice-buttons" class="choice-buttons">
+                    <button class="choice-btn">Explore the garden shed</button>
+                    <button class="choice-btn">Climb the fence to the next yard</button>
+                    <button class="choice-btn">Meow loudly to attract attention</button>
+                    <button class="choice-btn">Take a nap in the sun</button>
+                </div>
+            </div>
+            <nav class="game-nav">
+                <button id="humadex-btn" class="nav-btn">Humadex</button>
+                <button id="map-btn" class="nav-btn">Map</button>
+                <button id="menu-btn" class="nav-btn">Menu</button>
+            </nav>
+        </section>
+
+        <!-- Battle Screen -->
+        <section id="battle-screen" class="game-screen hidden">
+            <div class="battle-header">
+                <h3>Wild Human Encounter!</h3>
+            </div>
+            <div class="battle-container">
+                <div class="opponent-info">
+                    <h4 id="human-name">Office Worker</h4>
+                    <div class="human-description">
+                        <p id="human-description">A tired-looking human in business attire. They appear to be clutching a coffee cup as if their life depends on it.</p>
+                    </div>
+                    <div class="human-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">Level:</span>
+                            <span id="human-level">3</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Health:</span>
+                            <span id="human-health">50/50</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Status:</span>
+                            <span id="human-status">Alert</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="battle-actions">
+                    <button id="attack-btn" class="battle-btn">Scratch Attack</button>
+                    <button id="special-btn" class="battle-btn">Special Ability</button>
+                    <button id="capture-btn" class="battle-btn">Attempt Capture</button>
+                    <button id="flee-btn" class="battle-btn">Flee</button>
+                </div>
+                <div id="battle-log" class="battle-log">
+                    <p>A wild Office Worker appeared!</p>
+                    <p>They look confused by your presence.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Humadex Screen -->
+        <section id="humadex-screen" class="game-screen hidden">
+            <header class="humadex-header">
+                <h3>Humadex</h3>
+                <p>Your collection of cataloged humans</p>
+            </header>
+            <div class="humadex-filters">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Common</button>
+                <button class="filter-btn">Uncommon</button>
+                <button class="filter-btn">Rare</button>
+                <button class="filter-btn">Legendary</button>
+            </div>
+            <div class="humadex-grid">
+                <!-- Example entries -->
+                <div class="humadex-entry collected">
+                    <div class="entry-number">#001</div>
+                    <div class="entry-name">Office Worker</div>
+                </div>
+                <div class="humadex-entry">
+                    <div class="entry-number">#002</div>
+                    <div class="entry-name">???</div>
+                </div>
+                <div class="humadex-entry">
+                    <div class="entry-number">#003</div>
+                    <div class="entry-name">???</div>
+                </div>
+                <!-- More entries would be generated dynamically -->
+            </div>
+            <div class="humadex-details hidden">
+                <h4 id="detail-name">Office Worker</h4>
+                <div class="detail-type">Type: Common</div>
+                <div class="detail-description">
+                    <p>A common species of human found in urban environments. They subsist primarily on coffee and deadlines. Most active during weekdays.</p>
+                </div>
+                <div class="detail-stats">
+                    <div class="stat-row">
+                        <span class="stat-label">Height:</span>
+                        <span>5'9"</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Weight:</span>
+                        <span>160 lbs</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Habitat:</span>
+                        <span>Office buildings, coffee shops</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Diet:</span>
+                        <span>Coffee, sandwiches, stress</span>
+                    </div>
+                </div>
+                <button class="close-details-btn">Close</button>
+            </div>
+            <button id="back-from-humadex" class="back-btn">Back to Game</button>
+        </section>
+
+        <!-- Settings Screen -->
+        <section id="settings-screen" class="game-screen">
+            <header class="settings-header">
+                <h3>Game Settings</h3>
+            </header>
+            <div class="settings-container">
+                <div class="settings-group">
+                    <h4>Game Options</h4>
+                    <div class="setting-row">
+                        <label for="text-speed">Text Speed:</label>
+                        <select id="text-speed">
+                            <option value="slow">Slow</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="fast">Fast</option>
+                        </select>
+                    </div>
+                    <div class="setting-row">
+                        <label for="sound-toggle">Sound Effects:</label>
+                        <input type="checkbox" id="sound-toggle" checked>
+                    </div>
+                    <div class="setting-row">
+                        <label for="music-toggle">Background Music:</label>
+                        <input type="checkbox" id="music-toggle" checked>
+                    </div>
+                </div>
+                
+                <div class="settings-group">
+                    <h4>Gemini API Configuration</h4>
+                    <div class="setting-row">
+                        <label for="api-toggle">Use Gemini API:</label>
+                        <input type="checkbox" id="api-toggle">
+                    </div>
+                    <div id="api-config" class="api-config">
+                        <div class="setting-row">
+                            <label for="gemini-api-key">API Key:</label>
+                            <input type="password" id="gemini-api-key" placeholder="Enter your Gemini API key">
+                        </div>
+                        <div class="setting-row">
+                            <label for="api-usage">API Usage Level:</label>
+                            <select id="api-usage">
+                                <option value="minimal">Minimal (Save API calls)</option>
+                                <option value="balanced" selected>Balanced</option>
+                                <option value="extensive">Extensive (More dynamic content)</option>
+                            </select>
+                        </div>
+                        <div class="api-status">
+                            <span class="status-label">API Status:</span>
+                            <span id="api-status" class="status-indicator not-configured">Not Configured</span>
+                        </div>
+                        <button id="test-api-btn" class="secondary-btn">Test API Connection</button>
+                    </div>
+                </div>
+                
+                <div class="settings-group">
+                    <h4>Save Data</h4>
+                    <button id="save-settings-btn" class="primary-btn">Save Settings</button>
+                    <button id="reset-game-btn" class="danger-btn">Reset Game Data</button>
+                </div>
+            </div>
+            <button id="back-from-settings" class="back-btn">Back</button>
+        </section>
+
+        <!-- Dialog/Modal for notifications -->
+        <div id="game-dialog" class="game-dialog hidden">
+            <div class="dialog-content">
+                <h4 id="dialog-title">Notification</h4>
+                <p id="dialog-message">This is a notification message.</p>
+                <button id="dialog-close" class="primary-btn">OK</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/game.js"></script>
+</body>
+</html>
